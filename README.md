@@ -321,6 +321,7 @@ The repository also contains a Databricks Asset Bundle definition in
 Data Engineer | Databricks | PySpark | Azure | Data Quality
 
 🌐 **Portfolio:** [Visit my website](https://tonyfiuma.github.io/)
+💼 **LinkedIn:** [Connect with me on LinkedIn](https://www.linkedin.com/in/antonio-f-68aab419a/)
 💻 **GitHub:** [TonyFiuma](https://github.com/TonyFiuma)
 
 ---
@@ -330,4 +331,5 @@ Data Engineer | Databricks | PySpark | Azure | Data Quality
 Have a project, opportunity, or just want to connect?
 
 📩 **[Send me an email](mailto:axelfumano@gmail.com)**
+
 
