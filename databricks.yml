@@ -1,0 +1,12 @@
+bundle:
+  name: sellout-portfolio-full
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+  prod:
+    mode: production

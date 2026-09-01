@@ -1,0 +1,16 @@
+{
+  "project": "databricks-sellout-portfolio-full",
+  "source_history_included": false,
+  "production_data_included": false,
+  "anonymization": "deterministic one-way public aliases",
+  "legacy_import_notebooks": 78,
+  "parsing_notebooks": 7,
+  "gold_is_mocked": true,
+  "gold_model": "business-oriented serving layer",
+  "gold_tables": [
+    "sellout_curated",
+    "sellout_company_kpi",
+    "sellout_product_kpi",
+    "sellout_market_kpi"
+  ]
+}
