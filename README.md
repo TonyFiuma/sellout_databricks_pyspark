@@ -18,10 +18,6 @@ Catalog](https://img.shields.io/badge/Unity%20Catalog-Governance-6C63FF)
 
 ## 🖼️ Project at a Glance
 
-The image below is an **illustrative portfolio mockup** of the
-architecture and Databricks experience represented by this repository.
-It is not a screenshot of a production customer environment.
-
 ![Sell-Out Databricks Project
 Overview](docs/images/sellout-project-overview.png)
 
@@ -319,14 +315,19 @@ The repository also contains a Databricks Asset Bundle definition in
 
 ------------------------------------------------------------------------
 
-## 👤 Author
+## 👤 Let's Connect
 
-**Antonio Fiumanó**\
-Data Engineer \| Databricks \| PySpark \| Azure \| Data Quality
+**Antonio Fiumanó**
+Data Engineer | Databricks | PySpark | Azure | Data Quality
 
-GitHub: [TonyFiuma](https://github.com/TonyFiuma)
+🌐 **Portfolio:** [Visit my website](https://tonyfiuma.github.io/)
+💻 **GitHub:** [TonyFiuma](https://github.com/TonyFiuma)
 
-------------------------------------------------------------------------
+---
 
-⭐ If you found this project interesting, feel free to explore the
-repository and its architecture.
+⭐ If you found this project interesting, feel free to explore my portfolio and other projects.
+
+Have a project, opportunity, or just want to connect?
+
+📩 **[Send me an email](mailto:axelfumano@gmail.com)**
+
