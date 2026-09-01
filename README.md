@@ -1,304 +1,332 @@
-# 📊 Sell-Out Data Pipeline — Databricks & PySpark
+# 🚀 Sell-Out Analytics Pipeline on Azure Databricks
 
-## Overview
+![Databricks](https://img.shields.io/badge/Databricks-Data%20Engineering-FF3621?logo=databricks&logoColor=white)
+![PySpark](https://img.shields.io/badge/PySpark-Apache%20Spark-E25A1C?logo=apachespark&logoColor=white)
+![Delta
+Lake](https://img.shields.io/badge/Delta%20Lake-Lakehouse-00ADD8)
+![Azure](https://img.shields.io/badge/Microsoft%20Azure-Cloud-0078D4?logo=microsoftazure&logoColor=white)
+![Unity
+Catalog](https://img.shields.io/badge/Unity%20Catalog-Governance-6C63FF)
+![Architecture](https://img.shields.io/badge/Architecture-Medallion-success)
 
-The **Sell-Out Data Pipeline** is an end-to-end data engineering project built on **Azure Databricks** using the **Medallion Architecture (Bronze, Silver, Gold)**.
+> End-to-end Sell-Out data pipeline built with **Azure Databricks,
+> PySpark, Delta Lake and Unity Catalog**, covering heterogeneous
+> ingestion, harmonization, data quality, FX processing,
+> Sell-In/Sell-Out enrichment and business-ready Gold analytics.
 
-The pipeline integrates multiple heterogeneous and legacy data sources, applies source-specific parsing and business transformations, standardizes reference data and exchange rates, performs data-quality controls, and publishes business-ready Sell-Out datasets for analytics and reporting.
+------------------------------------------------------------------------
 
-This repository is a **sanitized portfolio version of a real-world project**. Production data, customer identities, environment details, original Git history, proprietary samples, and sensitive source information have been removed or pseudonymized.
+## 🖼️ Project at a Glance
 
-> **Note:** the Gold layer is a portfolio extension designed to demonstrate a realistic business-serving layer. It does not claim to reproduce the original production Gold implementation.
+The image below is an **illustrative portfolio mockup** of the
+architecture and Databricks experience represented by this repository.
+It is not a screenshot of a production customer environment.
 
----
+![Sell-Out Databricks Project
+Overview](docs/images/sellout-project-overview.png)
 
-## 🛠 Technologies Used
+------------------------------------------------------------------------
 
-- **Azure Databricks** — data processing and orchestration
-- **PySpark** — distributed ETL and transformation logic
-- **Delta Lake** — reliable Lakehouse tables
-- **Databricks SQL** — Gold aggregations and analytical serving
-- **Unity Catalog** — governance, access control and masking examples
-- **Python** — parsing, utility functions and data-quality logic
-- **Auto Loader** — incremental file-ingestion pattern
-- **Databricks Asset Bundles** — job/resource definition
-- **Medallion Architecture** — Bronze, Silver and Gold separation
+## 📌 Overview
 
----
+This repository is a **sanitized portfolio reconstruction of a
+real-world Data Engineering project**.
 
-## 🏗 Architecture
+The pipeline integrates many heterogeneous legacy sources and transforms
+them into a governed, harmonized and analytics-ready Lakehouse model.
 
-```text
-Raw files / Historical datasets
-             |
-             v
-          BRONZE
-   Raw ingestion + landing
-             |
-     +-------+--------+
-     |                |
-     v                v
-Source parsers   Legacy importers
-     |                |
-     +-------+--------+
-             |
-             v
-          SILVER
-   Reference normalization
-   Customer/channel mapping
-   Country/currency mapping
-   Product/company enrichment
-   Exchange-rate normalization
-   Harmonization
-   Sell-In valorization
-   Sell-Out valorization
-   Data Quality
-             |
-             v
-           GOLD
-      sellout_curated
-       /      |       \
-      v       v        v
- Company   Product   Market/Channel
-   KPI       KPI          KPI
-             |
-             v
-      SQL / BI / Reporting
+The public version preserves the engineering complexity of the original
+implementation while replacing confidential names, paths, mappings and
+business data with safe aliases or synthetic examples.
+
+### What this project demonstrates
+
+-   **78 legacy importers** for heterogeneous historical sources
+-   **7 source-specific parsers**
+-   PySpark transformation pipelines
+-   Delta Lake processing
+-   Medallion Architecture
+-   Data Quality validation
+-   Reference-data management
+-   Country / channel / customer mappings
+-   FX normalization
+-   Sell-In and Sell-Out enrichment
+-   Submission version management
+-   Business-oriented Gold datasets
+-   Unity Catalog governance and masking
+-   Databricks Asset Bundles
+
+------------------------------------------------------------------------
+
+## 🏗️ Architecture
+
+``` mermaid
+flowchart TB
+    A["📁 Heterogeneous Sources<br/>Excel · Legacy Files · Multiple Companies"]
+    B["🥉 BRONZE<br/>Raw Ingestion"]
+    C["⚙️ Source Parsing<br/>78 Legacy Importers · 7 Parsers"]
+    D["🥈 SILVER<br/>Harmonization & Data Quality"]
+    E["🌍 Reference Data<br/>Countries · Customers · Channels · FX"]
+    F["💰 Sell-In / Sell-Out<br/>Business Enrichment"]
+    G["🥇 GOLD<br/>Business Serving Layer"]
+    H["📊 Company KPI"]
+    I["📦 Product KPI"]
+    J["🌎 Market / Channel KPI"]
+    K["📈 BI · SQL · Analytics"]
+
+    A --> B
+    B --> C
+    C --> D
+    E --> D
+    D --> F
+    F --> G
+    G --> H
+    G --> I
+    G --> J
+    H --> K
+    I --> K
+    J --> K
 ```
 
----
+  -----------------------------------------------------------------------
+  Layer                               Responsibility
+  ----------------------------------- -----------------------------------
+  🥉 **Bronze**                       Source-aligned ingestion and
+                                      technical metadata
 
-## 🥉 Bronze Layer
+  🥈 **Silver**                       Parsing, standardization, mappings,
+                                      FX, validation and harmonization
 
-The Bronze layer preserves source-aligned data and ingestion metadata with minimal transformation.
+  🥇 **Gold**                         Reporting-specific business rules,
+                                      latest-submission selection and
+                                      analytical KPIs
+  -----------------------------------------------------------------------
 
-### Main responsibilities
+------------------------------------------------------------------------
 
-- Raw file ingestion
-- Landing-table creation
-- Ingestion metadata tracking
-- Batch traceability
-- Support for heterogeneous historical formats
+## 🧰 Technologies
 
-The project contains a large set of anonymized legacy importers and multiple source-specific parsers, reflecting the complexity of integrating data delivered by different partners and formats.
+  Technology                     Usage
+  ------------------------------ ---------------------------------------------
+  **Azure Databricks**           Lakehouse processing and orchestration
+  **PySpark**                    Distributed transformations
+  **Spark SQL**                  Analytical transformations and Gold outputs
+  **Delta Lake**                 Reliable managed tables
+  **Unity Catalog**              Governance, access control and masking
+  **Auto Loader**                Incremental file ingestion pattern
+  **Databricks Asset Bundles**   Deployment-oriented job definition
+  **Python**                     Parsing, validation and utilities
+  **Git / GitHub**               Version control and portfolio delivery
 
----
+------------------------------------------------------------------------
 
-## 🥈 Silver Layer
+## 🔄 Silver Layer
 
-The Silver layer converts heterogeneous source data into a reusable and consistent analytical dataset.
+Silver is the reusable quality and harmonization layer.
 
-### Main transformations
+``` text
+Reference countries / currencies
+          ↓
+Customer & channel mappings
+          ↓
+Product / company reference data
+          ↓
+FX normalization
+          ↓
+03_harmonize
+          ↓
+04_valorize_sellin
+          ↓
+05_valorize_sellout
+```
 
-- Country and currency normalization
-- Customer and sales-channel mapping
-- Product and company reference enrichment
-- Exchange-rate preparation and FX normalization
-- Schema harmonization across heterogeneous sources
-- Sell-In valorization
-- Sell-Out valorization
-- Mapping-status and validation controls
-- Data-quality checks
+Main responsibilities include schema normalization, country
+normalization, customer/channel resolution, mapping-status tracking, FX
+normalization, null/completeness checks, source traceability and
+Sell-In/Sell-Out business enrichment.
 
-The central output is the harmonized dataset used by downstream business logic.
-
----
+------------------------------------------------------------------------
 
 ## 🥇 Gold Layer
 
-The Gold layer is implemented as a **business-oriented serving layer** rather than an artificial star schema.
+Gold is modeled as a **business serving layer** rather than introducing
+fact and dimension tables only for architectural appearance.
 
-Silver already provides a rich harmonized dataset, so Gold focuses on reporting rules and analytical outputs.
+### `gold.sellout_curated`
 
-### Latest-submission rule
+The detailed, trusted Sell-Out dataset for analytical consumption.
 
-A partner can resend data for a previously submitted reporting period. Before publishing Gold, the pipeline keeps only the latest submission for each:
+A mocked but realistic reporting rule handles source resubmissions:
 
-```text
+``` text
 company + reporting_month
+             ↓
+     highest submission_id
+             ↓
+   publish latest version
 ```
 
-using the maximum sortable `submission_id`.
+Older submissions are excluded from reporting to prevent double
+counting.
 
-This avoids double counting when a previous submission is replaced by a newer one.
+### Business datasets
 
-### Gold datasets
+  -----------------------------------------------------------------------
+  Dataset                             Purpose
+  ----------------------------------- -----------------------------------
+  `gold.sellout_curated`              Detailed business-ready Sell-Out
+                                      data
 
-| Dataset | Purpose |
-|---|---|
-| `gold.sellout_curated` | Detailed business-ready Sell-Out dataset |
-| `gold.sellout_company_kpi` | Monthly company performance and month-over-month trend |
-| `gold.sellout_product_kpi` | Product performance and market reach |
-| `gold.sellout_market_kpi` | Country and sales-channel performance |
+  `gold.sellout_company_kpi`          Monthly company performance and MoM
+                                      trend
 
-### Example KPIs
+  `gold.sellout_product_kpi`          Semester product performance and
+                                      market reach
 
-- Total Sales
-- Total Quantity
-- Average Sales per Unit
-- Active Products
-- Active Markets
-- Active Customers
-- Month-over-Month Sales Growth
+  `gold.sellout_market_kpi`           Monthly country/channel performance
+  -----------------------------------------------------------------------
 
----
+Example KPIs include total sales, quantity, active products, active
+markets, active customers, average sales per unit and month-over-month
+sales growth.
 
-## ✅ Data Quality
+------------------------------------------------------------------------
 
-Data quality is applied across the pipeline rather than only at the end.
+## 🛡️ Data Quality
 
-Examples include:
+Data Quality is applied across the pipeline rather than only at the
+reporting boundary.
 
-- Mandatory-field validation
-- Mapping completeness
-- Negative quantity/sales detection
-- Submission consistency
-- Duplicate prevention
-- Gold output validation
-- Referential and schema controls
+**Silver:** mandatory fields, mapping completeness, invalid/null values,
+non-negative measures and reference consistency.
 
-The project also contains automated repository tests to prevent accidental publication of obvious environment identifiers or sensitive references.
+**Gold:** mandatory business identifiers, non-negative sales/quantities,
+row identity uniqueness, one selected submission per reporting period
+and aggregate availability.
 
----
+------------------------------------------------------------------------
 
 ## 🔐 Governance
 
-The project demonstrates governance patterns based on **Unity Catalog**.
+The project demonstrates **Unity Catalog** as the governance boundary:
 
-Key concepts include:
+-   Bronze / Silver / Gold schema separation
+-   group-oriented least privilege
+-   Unity Catalog managed tables
+-   customer-column masking
+-   Delta `NOT NULL` and `CHECK` constraints
+-   optional governed-tag / ABAC strategy
+-   clear separation between repository sanitization and runtime access
+    control
 
-- Catalog and schema separation
-- Least-privilege access
-- Group-oriented permissions
-- Managed Delta tables
-- Column masking example for customer identifiers
-- Delta `NOT NULL` and `CHECK` constraints
-- Optional ABAC / governed-tag strategy
-- Separation between repository sanitization and runtime data masking
+``` mermaid
+flowchart LR
+    UC["Unity Catalog"]
+    B["Bronze"]
+    S["Silver"]
+    G["Gold"]
+    M["Column Masking"]
+    LP["Least Privilege"]
+    AB["Optional ABAC"]
 
-No production secrets or workspace/storage credentials are stored in source control.
+    UC --> B
+    UC --> S
+    UC --> G
+    G --> M
+    UC --> LP
+    UC --> AB
+```
 
----
+------------------------------------------------------------------------
 
 ## 📁 Repository Structure
 
-```text
-src/
-├── ingestion/
-│   ├── 00_ingestion_raw_files.py
-│   ├── legacy_import/
-│   └── parsing_files/
+``` text
+sellout_databricks_pyspark/
 │
-├── silver/
-│   ├── 02_ref_country_currency.py
-│   ├── 02_ref_customers_channels.py
-│   ├── 02_ref_dimensions.py
-│   ├── 02_ref_exchange_rates.py
-│   ├── 02_ref_fx_normalized.py
-│   ├── 03_harmonize.py
-│   ├── 04_valorize_sellin.py
-│   └── 05_valorize_sellout.py
+├── src/
+│   ├── bronze/
+│   ├── silver/
+│   ├── gold/
+│   ├── governance/
+│   └── common/
 │
-├── gold/
-│   ├── 01_build_sellout_curated.py
-│   ├── 02_build_business_kpis.py
-│   └── 03_quality_checks.py
-│
-├── governance/
-└── common/
-
-resources/
-docs/
-tests/
-sample_data/
+├── resources/
+├── docs/
+│   └── images/
+├── tests/
+├── sample_data/
+├── databricks.yml
+├── SANITIZATION_REPORT.md
+└── README.md
 ```
 
----
+------------------------------------------------------------------------
 
-## 🔄 Pipeline Workflow
+## 🔒 Portfolio & Data Privacy
 
-```text
-Raw ingestion
-     ↓
-Source parsing / legacy import
-     ↓
-Reference preparation
-     ↓
-FX normalization
-     ↓
-Harmonization
-     ↓
-Sell-In / Sell-Out valorization
-     ↓
-Silver Data Quality
-     ↓
-Latest-submission selection
-     ↓
-Gold curated dataset
-     ↓
-Business KPIs
-     ↓
-Gold Data Quality
+This is **not a production data dump**.
+
+The public repository intentionally excludes original Git history,
+customer/company identities, production records, credentials, secrets,
+real storage paths, environment identifiers, proprietary mappings and
+identifiable sample values.
+
+Organizations and records used for demonstration are synthetic or
+pseudonymized.
+
+The visual shown at the top is also a generated **illustrative mockup**,
+not a captured customer or production UI.
+
+------------------------------------------------------------------------
+
+## 🎯 Engineering Decisions
+
+**Silver remains reusable.** Business-specific reporting logic is kept
+out of the harmonized layer where possible.
+
+**Gold is business-oriented.** A star schema is not introduced unless
+the analytical use case requires one.
+
+**Latest submissions win.** Reprocessed reporting periods are resolved
+before analytical publication.
+
+**Data Quality is explicit.** Invalid data is detected before reaching
+business reporting.
+
+**Governance is separate from anonymization.** Production information is
+removed before GitHub publication; runtime masking is a separate
+defense-in-depth control.
+
+------------------------------------------------------------------------
+
+## 🚀 Execution Flow
+
+``` text
+1. Configure Unity Catalog catalog / schemas
+2. Run ingestion
+3. Execute source parsers
+4. Prepare reference data
+5. Build Silver harmonized data
+6. Apply Sell-In / Sell-Out enrichment
+7. Build Gold curated dataset
+8. Build Gold KPI tables
+9. Execute Gold Data Quality checks
 ```
 
----
+The repository also contains a Databricks Asset Bundle definition in
+`databricks.yml`.
 
-## 🚀 How to Use
+------------------------------------------------------------------------
 
-### 1. Configure Databricks
+## 👤 Author
 
-Use a Unity Catalog-enabled Databricks workspace and review the portfolio-safe configuration under `src/common/`.
+**Antonio Fiumanó**\
+Data Engineer \| Databricks \| PySpark \| Azure \| Data Quality
 
-### 2. Review governance setup
+GitHub: [TonyFiuma](https://github.com/TonyFiuma)
 
-Execute or adapt the SQL scripts under:
+------------------------------------------------------------------------
 
-```text
-src/governance/
-```
-
-with an appropriately privileged deployment identity.
-
-### 3. Run the pipeline
-
-The repository includes a Databricks Asset Bundle definition and job resources. The notebooks can also be executed manually in dependency order for demonstration purposes.
-
-### 4. Validate Gold
-
-Run the Gold quality checks after generating the curated and KPI tables.
-
----
-
-## 🔒 Portfolio & Data Privacy Notice
-
-This repository preserves the engineering complexity of the source project while protecting confidential information.
-
-The following have been removed or replaced:
-
-- Production company and customer names
-- Production datasets
-- Original Git history
-- Workspace/catalog/storage identifiers
-- Proprietary source samples
-- Sensitive mapping values
-- Hard-coded execution identifiers
-
-Source organizations are represented using deterministic aliases such as `company_001`, `company_002`, etc., allowing the technical relationships to remain understandable without exposing real identities.
-
-For additional details, see `SANITIZATION_REPORT.md`.
-
----
-
-## 🎯 Project Goal
-
-The goal of this repository is to demonstrate practical experience in building a production-style Databricks data pipeline involving:
-
-- heterogeneous source integration;
-- distributed transformations with PySpark;
-- reference-data management;
-- data quality;
-- financial/FX normalization;
-- Medallion architecture;
-- business-oriented Gold modeling;
-- governance with Unity Catalog.
-
+⭐ If you found this project interesting, feel free to explore the
+repository and its architecture.
