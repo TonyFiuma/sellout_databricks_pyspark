@@ -1,0 +1,18 @@
+resources:
+  jobs:
+    sellout_gold_portfolio:
+      name: sellout-gold-portfolio
+      tasks:
+        - task_key: build_sellout_curated
+          notebook_task:
+            notebook_path: ../src/gold/01_build_sellout_curated.py
+        - task_key: build_business_kpis
+          depends_on:
+            - task_key: build_sellout_curated
+          notebook_task:
+            notebook_path: ../src/gold/02_build_business_kpis.py
+        - task_key: gold_quality
+          depends_on:
+            - task_key: build_business_kpis
+          notebook_task:
+            notebook_path: ../src/gold/03_quality_checks.py
